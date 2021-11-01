@@ -47,7 +47,7 @@ let vertexShader = createShaderFromScript(gl, gl.VERTEX_SHADER, "vertexShader");
 let fragmentShader = createShaderFromScript(
   gl,
   gl.FRAGMENT_SHADER,
-  "fragmentShader"
+  "fragmentShader" 
 );
 //创建着色器程序
 let program = createSimpleProgram(gl, vertexShader, fragmentShader);
