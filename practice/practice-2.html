@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- 第一个模板，初始化 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>我的第一个WebGl</title>
+  </head>
+  <body>
+    <!-- 顶点着色器源码 -->
+    <script type="shader-source" id="vertexShader">
+      // 设置浮点数经度为中等精度
+      precision mediump float;
+      // 接受点在canvas坐标系上的坐标（x,y)
+      // attribute变量：只能在顶点着色器中定义
+      attribute vec2 a_Position;
+      // 接受canvas的宽高尺寸
+      attribute vec2 a_Screen_Size;
+      void main(){
+        // start 将屏幕坐标系转化为裁剪坐标（裁剪坐标系）
+        vec2 position = (a_Position / a_Screen_Size) * 2.0 - 1.0; 
+   	    position = position * vec2(1.0, -1.0);
+   	    gl_Position = vec4(position, 0, 1);
+        // end 将屏幕坐标系转化为裁剪坐标（裁剪坐标系）
+        // 声明要绘制的点的大小。
+        gl_PointSize = 10.0;
+
+      }
+    </script>
+
+    <!-- 片元着色器源码 -->
+    <script type="shader-source" id="fragmentShader">
+      // 设置浮点数经度为中等经度
+      precision mediump float;
+      // 接受JavaScript  传来的颜色值（RGBA）。
+      // uniform变量： 既可以在顶点着色器中定义，也可以在片元着色器中定义
+      uniform vec4 u_Color;
+      void main(){
+        // 将普通的颜色标识转化为WebGL需要的表示方式，即将[0-255]转化为[0,1]之间。
+        vec4 color = u_Color / vec4(255, 255, 255, 1);
+   	    gl_FragColor = color; 
+      }
+    </script>
+    <!-- vec4：包含四个浮点元素的容器类型，vec 是 vector（向量）的单词简写，vec4 代表包含 4 个浮点数的向量。此外，还有 vec2、vec3 等类型，代表包含2个或者3个浮点数的容器。  -->
+    <canvas id="canvas"></canvas>
+
+    <script src="../utils/webgl-helper.js"></script>
+    <script src="./practice-2.js"></script>
+  </body>
+</html>

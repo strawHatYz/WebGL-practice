@@ -1,3 +1,4 @@
+// 第一个版本，初始化
 var canvas = document.querySelector("#canvas");
 // 设置canvas全屏
 resizeCanvas(canvas);
